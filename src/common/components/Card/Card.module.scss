@@ -1,16 +1,28 @@
+@import "../../styles/variables";
+
+.link {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .container {
   max-width: 440px;
   height: 218px;
-  background-color: greenyellow;
+  //background-color: greenyellow;
   padding: 7px 15px 13px 15px;
   overflow: auto;
 
+  border: 1px solid $bdColor;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
   .title {
+    display: block;
     margin-bottom: 18px;
     font-weight: 400;
     font-size: 20px;
     line-height: 23px;
-
+    @extend .link;
   }
   .author {
     display: flex;
@@ -26,12 +38,29 @@
       font-weight: 400;
       font-size: 18px;
       line-height: 21px;
+      @extend .link;
     }
   }
   .counts {
     display: flex;
     align-items: center;
     gap: 40px;
+    margin-bottom: 14px;
+  }
+  .button {
+    display: block;
+    padding-top: 16px;
+    text-align: center;
+    text-decoration: none;
+    height: 54px;
+    width: 100%;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    background: none;
+    border: 1px solid $bdColor;
+    color: #000000;
+    cursor: pointer;
   }
 }
 

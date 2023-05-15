@@ -27,8 +27,10 @@ const repositoriesSlice = createSlice({
                     author: repository.owner.login,
                     avatar: repository.owner.avatar_url,
                     stars: repository.stargazers_count,
-                    watchers: repository.stargazers_count
-                }
+                    watchers: repository.stargazers_count,
+                    projectUrl: repository.html_url,
+                    ownerUrl: repository.owner.html_url,
+                } as CardType
             })
             state.items = mappedItems
             state.incomplete_results = action.payload.incomplete_results
@@ -45,5 +47,7 @@ export type CardType = {
     author: string,
     avatar: string,
     stars: string,
-    watchers: string
+    watchers: string,
+    projectUrl: string,
+    ownerUrl: string
 }

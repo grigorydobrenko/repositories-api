@@ -1,26 +1,17 @@
 import React from 'react';
 import styles from './App.module.scss'
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import MainPage from "../pages/MainPage/MainPage";
 import CardPage from "../pages/CardPage/CardPage";
-
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <MainPage/>,
-    },
-    {
-        path: ":id",
-        element: <CardPage/>,
-    },
-
-]);
 
 function App() {
 
     return (
         <div className={styles.appContainer}>
-            <RouterProvider router={router}/>
+            <Routes>
+                <Route path={'/'} element={<MainPage/>}/>
+                <Route path={':id'} element={<CardPage/>}/>
+            </Routes>
         </div>
     );
 }

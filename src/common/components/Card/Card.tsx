@@ -3,17 +3,18 @@ import {CardType} from "../../../store/reducers/repositoriesReducer";
 import styles from './Card.module.scss'
 import {ReactComponent as Star} from "../../assets/star.svg";
 import {ReactComponent as Eye} from "../../assets/eye.svg";
+import {Link} from "react-router-dom";
 
 const Card: React.FC<CardType> = (props) => {
 
-    const {id, project, author, avatar, stars, watchers} = props
+    const {id, project, author, avatar, stars, watchers, projectUrl, ownerUrl} = props
 
     return (
         <div className={styles.container}>
-            <h4 className={styles.title}>{project}</h4>
+            <a href={projectUrl} className={styles.title}>{project}</a>
             <div className={styles.author}>
                 <img src={avatar} alt="avatar" className={styles.photo}/>
-                <div className={styles.name}>{author}</div>
+                <a href={ownerUrl} className={styles.name}>{author}</a>
             </div>
             <div className={styles.counts}>
                 <div className={styles.type_count}>
@@ -25,8 +26,10 @@ const Card: React.FC<CardType> = (props) => {
                     <span className={styles.count}>{watchers}</span>
                 </div>
             </div>
-            <div>
-
+            <div >
+                <Link to={`${id}`} className={styles.button}>
+                    Подробнее
+                </Link>
             </div>
         </div>
     );
