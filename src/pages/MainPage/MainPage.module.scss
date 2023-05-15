@@ -2,3 +2,14 @@
   padding: 32px 39px 47px 25px;
   background-color: #DDDDDD;
 }
+
+.main {
+  padding: 32px 39px 47px 25px;
+
+  .items_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* set 3 columns with equal width */
+    grid-gap: 20px; /* add some space between items */
+  }
+}
+

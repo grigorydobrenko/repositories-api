@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './App.module.scss'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import MainPage from "../pages/MainPage/MainPage";
-import Card from "../pages/Card/Card";
+import CardPage from "../pages/CardPage/CardPage";
 
 const router = createBrowserRouter([
     {
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     },
     {
         path: ":id",
-        element: <Card/>,
+        element: <CardPage/>,
     },
 
 ]);
