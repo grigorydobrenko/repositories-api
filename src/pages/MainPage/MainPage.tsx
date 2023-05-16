@@ -1,16 +1,18 @@
 import React, {useEffect} from 'react';
 import SearchBar from "../../common/components/SearchBar/SearchBar";
 import styles from './MainPage.module.scss'
-import {useAppDispatch} from "../../store/hooks";
-import {fetchRepositories} from "../../store/reducers/repositoriesReducer";
 import List from "../../common/components/List";
+import {fetchRepositories} from "../../store/reducers/repositoriesReducer";
+import {useAppDispatch} from "../../common/hooks/useAppDispatch";
+import {useAppSelector} from "../../common/hooks/useAppSelector";
 
 const MainPage = () => {
 
     const dispatch = useAppDispatch()
+    const {page, per_page} = useAppSelector(state => state.repositories)
 
     useEffect(() => {
-        dispatch(fetchRepositories())
+        dispatch(fetchRepositories({q: 'repositories', page, per_page}))
     }, [])
 
     return (

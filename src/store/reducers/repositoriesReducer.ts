@@ -1,11 +1,11 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {repositoriesService} from "../../service/repositoriesService";
 
+
 export const fetchRepositories = createAsyncThunk(
     'repositories/fetchRepositories',
-    async (_, thunkAPI) => {
-        const data = await repositoriesService.getRepositories({f: ''})
-        console.log(data)
+    async (param: { q: string, page: string, per_page: string }, thunkAPI) => {
+        const data = await repositoriesService.getRepositories(param)
         return data
     }
 )
@@ -15,7 +15,9 @@ const repositoriesSlice = createSlice({
     initialState: {
         items: [],
         incomplete_results: null,
-        total_count: null
+        total_count: null,
+        page: '1',
+        per_page: '10',
     },
     reducers: {},
     extraReducers: (builder) => {
