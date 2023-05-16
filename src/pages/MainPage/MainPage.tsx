@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import SearchBar from "../../common/components/SearchBar/SearchBar";
 import styles from './MainPage.module.scss'
-import List from "../../common/components/List";
+import List from "../../common/components/List/List";
 import {fetchRepositories} from "../../store/reducers/repositoriesReducer";
 import {useAppDispatch} from "../../common/hooks/useAppDispatch";
 import {useAppSelector} from "../../common/hooks/useAppSelector";
@@ -12,7 +12,7 @@ const MainPage = () => {
     const {page, per_page} = useAppSelector(state => state.repositories)
 
     useEffect(() => {
-        dispatch(fetchRepositories({q: 'repositories', page, per_page}))
+        dispatch(fetchRepositories({q: 'repositories-api', page, per_page}))
     }, [])
 
     return (

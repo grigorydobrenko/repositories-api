@@ -15,7 +15,7 @@ const repositoriesSlice = createSlice({
     initialState: {
         items: [],
         incomplete_results: null,
-        total_count: null,
+        total_count: 60,
         page: '1',
         per_page: '10',
     },
