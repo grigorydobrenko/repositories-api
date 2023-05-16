@@ -3,7 +3,7 @@ import styles from './SearchBar.module.scss'
 
 import {ReactComponent as SearchIcon} from "../../assets/search_icon.svg";
 import useDebounce from "../../hooks/useDebounce";
-import {fetchRepositories} from "../../../store/reducers/repositoriesReducer";
+import {fetchRepositories, setSearchValue} from "../../../store/reducers/repositoriesReducer";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {useAppSelector} from "../../hooks/useAppSelector";
 
@@ -21,6 +21,7 @@ const SearchBar = () => {
 
     useEffect(() => {
         if (value.length >= 3) {
+            dispatch(setSearchValue(value))
             dispatch(fetchRepositories({q: value, page, per_page}))
         }
     }, [debouncedValue])

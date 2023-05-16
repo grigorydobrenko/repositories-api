@@ -18,8 +18,13 @@ const repositoriesSlice = createSlice({
         total_count: 60,
         page: '1',
         per_page: '10',
+        searchValue: ''
     },
-    reducers: {},
+    reducers: {
+        setSearchValue: (state, action) => {
+            state.searchValue = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchRepositories.fulfilled, (state, action) => {
             const mappedItems = action.payload.items.map((repository: any) => {
@@ -42,6 +47,8 @@ const repositoriesSlice = createSlice({
 })
 
 export const repositoriesReducer = repositoriesSlice.reducer
+
+export const {setSearchValue} = repositoriesSlice.actions
 
 export type CardType = {
     id: string,
