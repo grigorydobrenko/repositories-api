@@ -10,16 +10,21 @@ export const fetchRepositories = createAsyncThunk(
     }
 )
 
+const storageSearchValue = localStorage.getItem('searchValue')
+const storagePage = localStorage.getItem('currentPage')
+
+const initialState = {
+    items: [],
+    incomplete_results: null,
+    total_count: 60,
+    page: storagePage ?? '1',
+    per_page: '10',
+    searchValue: storageSearchValue ?? ''
+}
+
 const repositoriesSlice = createSlice({
     name: 'repositories',
-    initialState: {
-        items: [],
-        incomplete_results: null,
-        total_count: 60,
-        page: '1',
-        per_page: '10',
-        searchValue: ''
-    },
+    initialState,
     reducers: {
         setSearchValue: (state, action) => {
             state.searchValue = action.payload

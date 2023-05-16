@@ -8,7 +8,9 @@ import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {useAppSelector} from "../../hooks/useAppSelector";
 
 const SearchBar = () => {
-    const [value, setValue] = useState<string>('')
+    const searchValue = useAppSelector(state => state.repositories.searchValue)
+
+    const [value, setValue] = useState<string>(searchValue)
     const debouncedValue = useDebounce<string>(value, 500)
 
     const dispatch = useAppDispatch()
@@ -20,6 +22,7 @@ const SearchBar = () => {
     }
 
     useEffect(() => {
+        localStorage.setItem('searchValue', value)
         if (value.length >= 3) {
             dispatch(setSearchValue(value))
             dispatch(fetchRepositories({q: value, page, per_page}))

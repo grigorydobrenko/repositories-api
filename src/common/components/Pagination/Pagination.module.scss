@@ -35,8 +35,14 @@
         background-color: #00A3FF;
         color: white;
       }
-
     }
 
   }
 }
+
+.root_disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+

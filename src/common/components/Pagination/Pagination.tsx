@@ -10,6 +10,7 @@ const Pagination = () => {
     const totalCount = useAppSelector(state => state.repositories.total_count)
     const perPage = useAppSelector(state => state.repositories.per_page)
     const searchValue = useAppSelector(state => state.repositories.searchValue)
+    const page = useAppSelector(state => state.repositories.page)
 
     const pageCount = Math.ceil(totalCount/+perPage)
 
@@ -17,12 +18,13 @@ const Pagination = () => {
 
     const setCurrentPage = (event: any) => {
         const selected = event.selected + 1
+        localStorage.setItem('currentPage', selected)
         dispacth(fetchRepositories({q: searchValue, page: selected, per_page: '10'}))
     }
 
     return (
         <ReactPaginate
-            className={styles.root}
+            className={searchValue.length < 3 ? `${styles.root_disabled} ${styles.root}` : styles.root}
             breakLabel="..."
             nextLabel=">"
             onPageChange={setCurrentPage}
@@ -31,7 +33,7 @@ const Pagination = () => {
             pageCount={pageCount}
             previousLabel="<"
             renderOnZeroPageCount={null}
-
+            initialPage={+page - 1}
         />
     );
 };
