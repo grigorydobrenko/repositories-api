@@ -5,7 +5,8 @@ const BASE_URL = 'https://api.github.com/search/repositories?'
 const instance = axios.create({
     baseURL: BASE_URL,
     headers: {
-        'Authorization': 'Bearer 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',
+        'Authorization': 'Bearer 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',
+        // 'Authorization': 'Bearer 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',
         'X-GitHub-Api-Version': '2022-11-28'
     }
 })

@@ -17,6 +17,11 @@
   }
   .logo {
     border-left: 1px solid $bdColor;
+    cursor: pointer;
+  }
+
+  .search {
+    cursor: pointer;
   }
 }
 
