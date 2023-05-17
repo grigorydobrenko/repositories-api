@@ -9,10 +9,10 @@ import {useAppSelector} from "../../common/hooks/useAppSelector";
 const MainPage = () => {
 
     const dispatch = useAppDispatch()
-    const {page, per_page} = useAppSelector(state => state.repositories)
+    const {searchValue, page, per_page} = useAppSelector(state => state.repositories)
 
     useEffect(() => {
-        dispatch(fetchRepositories({q: 'repositories-api', page, per_page}))
+        dispatch(fetchRepositories({q: searchValue ?? 'repositories-api', page, per_page}))
     }, [])
 
     return (

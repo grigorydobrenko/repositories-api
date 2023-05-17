@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
-import {useLocation} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {useLocation, useNavigate} from "react-router-dom";
 import styles from './CardPage.module.scss';
 import {ReactComponent as Delete} from "../../common/assets/cross.svg";
+import {useAppDispatch} from "../../common/hooks/useAppDispatch";
+import {addChangeRepository} from "../../store/reducers/repositoriesReducer";
 
 const CardPage = () => {
         const location = useLocation();
@@ -15,6 +17,11 @@ const CardPage = () => {
         const [isProjectEdit, setIsProjectEdit] = useState(false)
         const [isAuthorEdit, setIsAuthorEdit] = useState(false)
         const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
+        const [isDeleted, setIsDeleted] = useState(false)
+
+        const navigate = useNavigate();
+
+        const dispatch = useAppDispatch()
 
         const activateProjectEdit = () => {
             setIsProjectEdit(!isProjectEdit)
@@ -26,9 +33,26 @@ const CardPage = () => {
             setIsDescriptionEdit(!isDescriptionEdit)
         }
 
+        const deleteEntity = () => {
+            const {id} = locationData
+            const deletedRepository = {id}
+
+            dispatch(addChangeRepository(deletedRepository))
+            setIsDeleted(true)
+
+        }
+
+        useEffect(() => {
+            if (isDeleted) {
+                navigate("../");
+            }
+        }, [isDeleted, navigate]);
+
         return (
             <div className={styles.container}>
-                <div className={styles.btn_container}><button className={styles.btn}><Delete/></button></div>
+                <div className={styles.btn_container}>
+                    <button className={styles.btn} onClick={deleteEntity}><Delete/></button>
+                </div>
                 {isProjectEdit ?
                     <input type={'text'} value={project} onChange={event => setProject(event.currentTarget.value)}
                            onBlur={activateProjectEdit} autoFocus/> :
