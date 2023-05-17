@@ -18,24 +18,30 @@ const Paginator:React.FC<PaginationType> = ({pageCountOptions}) => {
 
     const pageCount = Math.ceil(paginationTotalCount / +perPage)
 
-    const dispacth = useAppDispatch()
+    const dispatch = useAppDispatch()
 
     const pageCountHandler = () => {
         setVisibility(!visibility)
     }
 
     const onPageCountChanged = (el: string) => {
-        localStorage.setItem('currentPerPage', el)
-        dispacth(setPerPage(el))
-        dispacth(fetchRepositories({q: searchValue, page, per_page: el}))
+        localStorage.setItem('PerPage', el)
+        localStorage.setItem('currentPage', '1')
+
+        dispatch(setPerPage(el))
+        dispatch(setCurrentPage('1'))
+        console.log('render')
+        dispatch(fetchRepositories({q: searchValue, page: '1', per_page: el}))
     }
 
     const onPageChange = (event: any) => {
         const selected = event.selected + 1
         localStorage.setItem('currentPage', selected)
-        dispacth(setCurrentPage(selected))
-        dispacth(fetchRepositories({q: searchValue, page: selected, per_page: perPage}))
+        dispatch(setCurrentPage(selected))
+        dispatch(fetchRepositories({q: searchValue, page: selected, per_page: perPage}))
     }
+
+    console.log(page)
 
     return (
         <div className={styles.paginator_box}>
@@ -75,6 +81,7 @@ const Paginator:React.FC<PaginationType> = ({pageCountOptions}) => {
                 previousLabel="<"
                 renderOnZeroPageCount={null}
                 initialPage={+page - 1}
+                forcePage={+page - 1}
             />
         </div>
     );
