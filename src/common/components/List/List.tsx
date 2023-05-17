@@ -2,7 +2,7 @@ import React from 'react';
 import {CardType} from "../../../store/reducers/repositoriesReducer";
 import Card from "../Card/Card";
 import {useAppSelector} from "../../hooks/useAppSelector";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "../Paginator/Paginator";
 import styles from "./List.module.scss"
 
 const List = () => {

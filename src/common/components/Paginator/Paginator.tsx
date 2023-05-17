@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import ReactPaginate from "react-paginate";
 import {useAppSelector} from "../../hooks/useAppSelector";
-import styles from './Pagination.module.scss'
+import styles from './Paginator.module.scss'
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {fetchRepositories, setCurrentPage, setPerPage} from "../../../store/reducers/repositoriesReducer";
 
