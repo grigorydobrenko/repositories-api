@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactPaginate, {ReactPaginateProps} from "react-paginate";
+import ReactPaginate from "react-paginate";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import styles from './Pagination.module.scss'
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -12,7 +12,9 @@ const Pagination = () => {
     const searchValue = useAppSelector(state => state.repositories.searchValue)
     const page = useAppSelector(state => state.repositories.page)
 
-    const pageCount = Math.ceil(totalCount/+perPage)
+    const paginationTotalCount = totalCount < 1000? totalCount: 1000
+
+    const pageCount = Math.ceil(paginationTotalCount/+perPage)
 
     const dispacth = useAppDispatch()
 
