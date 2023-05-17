@@ -30,7 +30,6 @@ const Paginator:React.FC<PaginationType> = ({pageCountOptions}) => {
 
         dispatch(setPerPage(el))
         dispatch(setCurrentPage('1'))
-        console.log('render')
         dispatch(fetchRepositories({q: searchValue, page: '1', per_page: el}))
     }
 
@@ -40,8 +39,6 @@ const Paginator:React.FC<PaginationType> = ({pageCountOptions}) => {
         dispatch(setCurrentPage(selected))
         dispatch(fetchRepositories({q: searchValue, page: selected, per_page: perPage}))
     }
-
-    console.log(page)
 
     return (
         <div className={styles.paginator_box}>
