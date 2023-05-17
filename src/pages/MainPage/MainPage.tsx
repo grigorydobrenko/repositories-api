@@ -5,14 +5,18 @@ import List from "../../common/components/List/List";
 import {fetchRepositories} from "../../store/reducers/repositoriesReducer";
 import {useAppDispatch} from "../../common/hooks/useAppDispatch";
 import {useAppSelector} from "../../common/hooks/useAppSelector";
+import Loader from "../../common/components/Loader/Loader";
 
 const MainPage = () => {
 
     const dispatch = useAppDispatch()
     const {searchValue, page, per_page} = useAppSelector(state => state.repositories)
+    const {isLoading, isInitialized} = useAppSelector(state => state.app)
 
     useEffect(() => {
-        dispatch(fetchRepositories({q: searchValue ?? 'repositories-api', page, per_page}))
+        if (!isInitialized) {
+            dispatch(fetchRepositories({q: searchValue ?? 'repositories-api', page, per_page}))
+        }
     }, [])
 
     return (
@@ -21,7 +25,7 @@ const MainPage = () => {
                 <SearchBar/>
             </header>
             <main className={styles.main}>
-                <List/>
+                {isLoading ? <Loader/> : <List/>  }
             </main>
         </div>
     );

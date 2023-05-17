@@ -13,7 +13,6 @@ const List = () => {
         <div>
             <Pagination pageCountOptions={['10', '25', '50']}/>
             <div className={styles.items_container}>
-
                 {repositories.map((repository: CardType) => {
                     return <Card key={repository.id} id={repository.id} project={repository.project}
                                  author={repository.author} stars={repository.stars}

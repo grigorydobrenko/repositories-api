@@ -1,11 +1,15 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {repositoriesService} from "../../service/repositoriesService";
+import {setIsInitialized, setIsLoading} from "./appReducer";
 
 
 export const fetchRepositories = createAsyncThunk(
     'repositories/fetchRepositories',
-    async (param: { q: string, page: string, per_page: string }, thunkAPI) => {
+    async (param: { q: string, page: string, per_page: string}, thunkAPI) => {
+        thunkAPI.dispatch(setIsLoading(true))
         const data = await repositoriesService.getRepositories(param)
+        thunkAPI.dispatch(setIsInitialized(true))
+        thunkAPI.dispatch(setIsLoading(false))
         return data
     }
 )
