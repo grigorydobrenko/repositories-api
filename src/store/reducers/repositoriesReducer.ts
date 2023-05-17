@@ -6,6 +6,7 @@ export const fetchRepositories = createAsyncThunk(
     'repositories/fetchRepositories',
     async (param: { q: string, page: string, per_page: string }, thunkAPI) => {
         const data = await repositoriesService.getRepositories(param)
+        console.log(data.items)
         return data
     }
 )
@@ -49,6 +50,7 @@ const repositoriesSlice = createSlice({
                     watchers: repository.stargazers_count,
                     projectUrl: repository.html_url,
                     ownerUrl: repository.owner.html_url,
+                    description: repository.description
                 } as CardType
             })
             state.items = mappedItems
@@ -70,5 +72,6 @@ export type CardType = {
     stars: string,
     watchers: string,
     projectUrl: string,
-    ownerUrl: string
+    ownerUrl: string,
+    description: string,
 }

@@ -27,7 +27,7 @@ const Card: React.FC<CardType> = (props) => {
                 </div>
             </div>
             <div >
-                <Link to={`${id}`} className={styles.button}>
+                <Link to={`${id}`} state={props} className={styles.button}>
                     Подробнее
                 </Link>
             </div>

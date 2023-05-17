@@ -20,6 +20,7 @@ const List = () => {
                                  watchers={repository.watchers} avatar={repository.avatar}
                                  projectUrl={repository.projectUrl}
                                  ownerUrl={repository.ownerUrl}
+                                 description={repository.description}
                     />
                 })}</div>
         </div>
