@@ -53,18 +53,30 @@ const CardPage = () => {
                 <div className={styles.btn_container}>
                     <button className={styles.btn} onClick={deleteEntity}><Delete/></button>
                 </div>
-                {isProjectEdit ?
-                    <input type={'text'} value={project} onChange={event => setProject(event.currentTarget.value)}
-                           onBlur={activateProjectEdit} autoFocus/> :
-                    <div onDoubleClick={() => setIsProjectEdit(prevState => !prevState)}>{project}</div>}
-                {isAuthorEdit ?
-                    <input type={'text'} value={author} onChange={event => setAuthor(event.currentTarget.value)}
-                           onBlur={activateAuthorEdit} autoFocus/> :
-                    <div onDoubleClick={() => setIsAuthorEdit(prevState => !prevState)}>{author}</div>}
-                {isDescriptionEdit ?
-                    <input type={'text'} value={description} onChange={event => setDescription(event.currentTarget.value)}
-                           onBlur={activateDescriptionEdit} autoFocus/> :
-                    <div onDoubleClick={() => setIsDescriptionEdit(prevState => !prevState)}>{description}</div>}
+                <div>
+                    <div className={styles.row}>
+                        <span className={styles.row_title}>Project name: </span>
+                        {isProjectEdit ?
+                            <input type={'text'} value={project} onChange={event => setProject(event.currentTarget.value)}
+                                   onBlur={activateProjectEdit} autoFocus/> :
+                            <div onDoubleClick={() => setIsProjectEdit(prevState => !prevState)} className={styles.row_description}>{project}</div>}
+                    </div>
+                    <div className={styles.row}>
+                        <span className={styles.row_title}>Author: </span>
+                        {isAuthorEdit ?
+                            <input type={'text'} value={author} onChange={event => setAuthor(event.currentTarget.value)}
+                                   onBlur={activateAuthorEdit} autoFocus/> :
+                            <div onDoubleClick={() => setIsAuthorEdit(prevState => !prevState)} className={styles.row_description}>{author}</div>}
+                    </div>
+                    <div className={styles.row}>
+                        <span className={styles.row_title}>Description: </span>
+                        {isDescriptionEdit ?
+                            <input type={'text'} value={description}
+                                   onChange={event => setDescription(event.currentTarget.value)}
+                                   onBlur={activateDescriptionEdit} autoFocus/> :
+                            <div onDoubleClick={() => setIsDescriptionEdit(prevState => !prevState)} className={styles.row_description}>{description}</div>}
+                    </div>
+                </div>
             </div>
         );
     }

@@ -8,7 +8,7 @@
   margin: 300px auto;
   width: 50%;
   border: 1px solid $bdColor;
-  padding: 50px;
+  padding: 20px;
   border-radius: 20px;
   overflow: auto;
 
@@ -29,6 +29,18 @@
       outline: inherit;
       width: 40px;
       height: 40px;
+    }
+  }
+
+  .row {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 10px;
+    .row_title {
+     font-weight: 700;
+    }
+    .row_description {
+      cursor: pointer;
     }
   }
 }

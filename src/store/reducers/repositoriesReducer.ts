@@ -52,6 +52,7 @@ const repositoriesSlice = createSlice({
 
             const filteredItems = state.rawItems.filter((repository: any) => {
                 const changedIndex = state.changedRepositories.findIndex((changedRepository) => changedRepository.id === repository.id);
+
                 if (changedIndex === -1) {
                     return repository;
                 }
