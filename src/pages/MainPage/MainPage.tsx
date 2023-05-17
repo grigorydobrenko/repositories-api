@@ -15,7 +15,7 @@ const MainPage = () => {
 
     useEffect(() => {
         if (!isInitialized) {
-            dispatch(fetchRepositories({q: searchValue ?? 'repositories-api', page, per_page}))
+            dispatch(fetchRepositories({q: searchValue, page, per_page}))
         }
     }, [])
 

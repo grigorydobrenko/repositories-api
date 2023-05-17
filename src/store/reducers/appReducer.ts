@@ -4,7 +4,7 @@ const appSlice = createSlice({
     name: 'app',
     initialState: {
         isLoading: null as boolean | null,
-        isInitialized: false as boolean | null
+        isInitialized: false as boolean
     },
     reducers: {
         setIsLoading(state, action) {

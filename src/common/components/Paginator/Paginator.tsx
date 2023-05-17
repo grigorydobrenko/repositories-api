@@ -5,7 +5,7 @@ import styles from './Paginator.module.scss'
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {fetchRepositories, setCurrentPage, setPerPage} from "../../../store/reducers/repositoriesReducer";
 
-const Paginator:React.FC<PaginationType> = ({pageCountOptions}) => {
+const Paginator: React.FC<PaginationType> = ({pageCountOptions}) => {
 
     const [visibility, setVisibility] = useState<boolean>(false)
 
@@ -77,7 +77,6 @@ const Paginator:React.FC<PaginationType> = ({pageCountOptions}) => {
                 pageCount={pageCount}
                 previousLabel="<"
                 renderOnZeroPageCount={null}
-                initialPage={+page - 1}
                 forcePage={+page - 1}
             />
         </div>
