@@ -2,7 +2,6 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {repositoriesService} from "../../service/repositoriesService";
 import {setIsInitialized, setIsLoading} from "./appReducer";
 
-
 export const fetchRepositories = createAsyncThunk(
     'repositories/fetchRepositories',
     async (param: { q: string, page: string, per_page: string}, thunkAPI) => {
@@ -25,7 +24,7 @@ const initialState = {
     total_count: 60,
     page: storagePage ?? '1',
     per_page: storagePerPage ?? '10',
-    searchValue: storageSearchValue ?? '',
+    searchValue: storageSearchValue ?? 'repositories',
     changedRepositories: [] as ChangedRepository[]
 }
 
