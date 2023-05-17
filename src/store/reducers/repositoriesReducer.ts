@@ -12,13 +12,14 @@ export const fetchRepositories = createAsyncThunk(
 
 const storageSearchValue = localStorage.getItem('searchValue')
 const storagePage = localStorage.getItem('currentPage')
+const storagePerPage = localStorage.getItem('perPage')
 
 const initialState = {
     items: [],
     incomplete_results: null,
     total_count: 60,
     page: storagePage ?? '1',
-    per_page: '10',
+    per_page: storagePerPage ?? '10',
     searchValue: storageSearchValue ?? ''
 }
 
@@ -28,7 +29,13 @@ const repositoriesSlice = createSlice({
     reducers: {
         setSearchValue: (state, action) => {
             state.searchValue = action.payload
-        }
+        },
+        setCurrentPage: (state, action) => {
+            state.page = action.payload
+        },
+        setPerPage: (state, action) => {
+            state.per_page = action.payload
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchRepositories.fulfilled, (state, action) => {
@@ -53,7 +60,7 @@ const repositoriesSlice = createSlice({
 
 export const repositoriesReducer = repositoriesSlice.reducer
 
-export const {setSearchValue} = repositoriesSlice.actions
+export const {setSearchValue, setCurrentPage, setPerPage} = repositoriesSlice.actions
 
 export type CardType = {
     id: string,

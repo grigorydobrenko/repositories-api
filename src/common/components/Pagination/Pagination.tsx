@@ -1,43 +1,87 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactPaginate from "react-paginate";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import styles from './Pagination.module.scss'
 import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {fetchRepositories} from "../../../store/reducers/repositoriesReducer";
+import {fetchRepositories, setCurrentPage, setPerPage} from "../../../store/reducers/repositoriesReducer";
 
-const Pagination = () => {
+const Paginator:React.FC<PaginationType> = ({pageCountOptions}) => {
+
+    const [visibility, setVisibility] = useState<boolean>(false)
 
     const totalCount = useAppSelector(state => state.repositories.total_count)
     const perPage = useAppSelector(state => state.repositories.per_page)
     const searchValue = useAppSelector(state => state.repositories.searchValue)
     const page = useAppSelector(state => state.repositories.page)
 
-    const paginationTotalCount = totalCount < 1000? totalCount: 1000
+    const paginationTotalCount = totalCount < 1000 ? totalCount : 999
 
-    const pageCount = Math.ceil(paginationTotalCount/+perPage)
+    const pageCount = Math.ceil(paginationTotalCount / +perPage)
 
     const dispacth = useAppDispatch()
 
-    const setCurrentPage = (event: any) => {
+    const pageCountHandler = () => {
+        setVisibility(!visibility)
+    }
+
+    const onPageCountChanged = (el: string) => {
+        localStorage.setItem('currentPerPage', el)
+        dispacth(setPerPage(el))
+        dispacth(fetchRepositories({q: searchValue, page, per_page: el}))
+    }
+
+    const onPageChange = (event: any) => {
         const selected = event.selected + 1
         localStorage.setItem('currentPage', selected)
-        dispacth(fetchRepositories({q: searchValue, page: selected, per_page: '10'}))
+        dispacth(setCurrentPage(selected))
+        dispacth(fetchRepositories({q: searchValue, page: selected, per_page: perPage}))
     }
 
     return (
-        <ReactPaginate
-            className={searchValue.length < 3 ? `${styles.root_disabled} ${styles.root}` : styles.root}
-            breakLabel="..."
-            nextLabel=">"
-            onPageChange={setCurrentPage}
-            pageRangeDisplayed={7}
-            marginPagesDisplayed={1}
-            pageCount={pageCount}
-            previousLabel="<"
-            renderOnZeroPageCount={null}
-            initialPage={+page - 1}
-        />
+        <div className={styles.paginator_box}>
+            <div className={styles.page_count_box}>
+                <div
+                    className={styles.page_count}
+                    onClick={pageCountHandler}
+                >
+                    {perPage} &dArr;
+                </div>
+                {visibility &&
+                    <div className={styles.page_count_options}>
+                        {pageCountOptions.map((el, index) => {
+                            const onClickHandler = () => {
+                                onPageCountChanged(el)
+                                setVisibility(false)
+                            }
+                            return <div
+                                key={index}
+                                className={styles.el}
+                                onClick={onClickHandler}
+                            >
+                                {el}
+                            </div>
+                        })}
+                    </div>
+                }
+            </div>
+            <ReactPaginate
+                className={searchValue.length < 3 ? `${styles.root_disabled} ${styles.root}` : styles.root}
+                breakLabel="..."
+                nextLabel=">"
+                onPageChange={onPageChange}
+                pageRangeDisplayed={7}
+                marginPagesDisplayed={1}
+                pageCount={pageCount}
+                previousLabel="<"
+                renderOnZeroPageCount={null}
+                initialPage={+page - 1}
+            />
+        </div>
     );
 };
 
-export default Pagination;
+export default Paginator;
+
+type PaginationType = {
+    pageCountOptions: string[]
+}
